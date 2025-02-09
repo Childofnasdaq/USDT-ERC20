@@ -3,33 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto USDT Transfer</title>
+    <title>Auto Transfer Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h2>USDT Auto Transfer</h2>
-        
-        <label>Your Wallet Address:</label>
-        <input type="text" id="walletAddress" placeholder="Enter your ETH wallet address">
-        
-        <label>Receiver Wallet Address:</label>
-        <input type="text" id="receiverAddress" placeholder="Enter receiver's ETH wallet">
-
-        <label>Select Transfer Mode:</label>
-        <select id="transferMode">
-            <option value="all">Send All USDT</option>
-            <option value="custom">Send Specific Amount</option>
-        </select>
-
-        <div id="customAmountDiv" style="display: none;">
-            <label>Amount to Send (USDT):</label>
-            <input type="number" id="customAmount" placeholder="Enter amount">
-        </div>
-
-        <button onclick="startMonitoring()">Start Monitoring</button>
-        
-        <p id="status">Status: Not Connected</p>
+        <h1>Auto Transfer Dashboard</h1>
+        <p>Status: <span id="status">Connecting...</span></p>
+        <h2>Transaction History</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>To</th>
+                    <th>Transaction Hash</th>
+                </tr>
+            </thead>
+            <tbody id="transaction-list">
+                <!-- Transactions will be loaded here -->
+            </tbody>
+        </table>
     </div>
 
     <script src="script.js"></script>
