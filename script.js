@@ -1,26 +1,22 @@
-document.getElementById('transferMode').addEventListener('change', function() {
-    document.getElementById('customAmountDiv').style.display = this.value === 'custom' ? 'block' : 'none';
-});
+async function fetchTransactions() {
+    const response = await fetch('/transactions');
+    const data = await response.json();
+    const transactionList = document.getElementById('transaction-list');
 
-async function startMonitoring() {
-    const walletAddress = document.getElementById('walletAddress').value;
-    const receiverAddress = document.getElementById('receiverAddress').value;
-    const transferMode = document.getElementById('transferMode').value;
-    const amount = document.getElementById('customAmount').value;
-
-    if (!walletAddress || !receiverAddress) {
-        alert("Please enter both wallet addresses.");
-        return;
-    }
-
-    document.getElementById('status').innerText = "Status: Connecting...";
-
-    const response = await fetch('/start-monitoring', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ walletAddress, receiverAddress, transferMode, amount })
+    transactionList.innerHTML = ''; // Clear previous entries
+    data.forEach(tx => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${tx.type}</td>
+            <td>${tx.amount}</td>
+            <td>${tx.to}</td>
+            <td><a href="https://etherscan.io/tx/${tx.txHash}" target="_blank">${tx.txHash}</a></td>
+        `;
+        transactionList.appendChild(row);
     });
 
-    const result = await response.json();
-    document.getElementById('status').innerText = `Status: ${result.message}`;
+    document.getElementById('status').textContent = "Connected";
 }
+
+setInterval(fetchTransactions, 5000); // Refresh every 5 seconds
+fetchTransactions();
