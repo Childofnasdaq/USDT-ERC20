@@ -1,0 +1,16 @@
+{
+  "name": "auto-transfer-usdt",
+  "version": "1.0.0",
+  "description": "Automated USDT and ETH transfer app",
+  "main": "app.js",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ethers": "^6.6.0",
+    "web3": "^1.10.0"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
